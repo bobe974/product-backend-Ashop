@@ -2,6 +2,7 @@ package com.etienne.productbackend.controller;
 
 import com.etienne.productbackend.exceptions.ProductNotFoundException;
 import com.etienne.productbackend.modele.Product;
+import com.etienne.productbackend.modele.ProductResponseFormat;
 import com.etienne.productbackend.services.ProductImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,11 @@ public class ProductContoller {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-
+    @CrossOrigin
     @GetMapping()
-    public List<Product> getAllProduct(){
-        return productService.readAll();
+    public ProductResponseFormat getAllProducts() {
+        List<Product> productList = productService.readAll();
+        return new ProductResponseFormat(productList);
     }
 
     @GetMapping(path = "{id}")
