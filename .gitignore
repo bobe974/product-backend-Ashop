@@ -6,6 +6,7 @@ target/
 
 
 ### STS ###
+target/
 .DS_Store
 .apt_generated
 .classpath

@@ -6,15 +6,17 @@ services:
   db:
     image: postgres
     restart: always
-    container_name: postgres_backend_product_container
+    container_name: db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
     ports:
       - 5432:5432
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 9000:8080
+  spring-app:
+      build: ../../../
+      #restart: always
+      ports:
+        - 3000:3000
+      depends_on:
+        - db  # Attendendre que la base de données PostgreSQL soit ok avant de démarrer l'application
