@@ -11,7 +11,7 @@ public class Product {
     private String code;
     @Column(nullable = false)
     private String name;
-    @Column(length = 1000)
+    @Column()
     private String description;
     @Column(nullable = false)
     private Double price;

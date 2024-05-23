@@ -2,6 +2,7 @@ package com.etienne.productbackend.controller;
 
 import com.etienne.productbackend.exceptions.ProductNotFoundException;
 import com.etienne.productbackend.modele.Product;
+import com.etienne.productbackend.modele.ProductResponseFormat;
 import com.etienne.productbackend.services.ProductImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "products")
 @RestController
 public class ProductContoller {
@@ -19,7 +21,6 @@ public class ProductContoller {
     public ProductContoller(ProductImpl productService){
         this.productService =productService;
     }
-
     @PostMapping()
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
         productService.create(product);
@@ -30,12 +31,11 @@ public class ProductContoller {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-
     @GetMapping()
-    public List<Product> getAllProduct(){
-        return productService.readAll();
+    public ProductResponseFormat getAllProducts() {
+        List<Product> productList = productService.readAll();
+        return new ProductResponseFormat(productList);
     }
-
     @GetMapping(path = "{id}")
     public Product getProductById(@PathVariable Long id){
         return productService.readById(id);
