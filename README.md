@@ -23,4 +23,11 @@ GET /api/products/{id}     # Retrieve a product by its ID
 POST /api/products         # Add a new product
 PATCH /api/products/{id}   # Update an existing product
 DELETE /api/products/{id}  # Delete a product
+```
+## Ports Used
+API: ```3000```
+PostgreSQL: ```5432```
 
+## Kanban Board
+You can view the project Kanban board [Kanban Board](https://github.com/users/bobe974/projects/3)
+.
