@@ -12,6 +12,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "products")
 @RestController
 public class ProductContoller {
@@ -20,7 +21,6 @@ public class ProductContoller {
     public ProductContoller(ProductImpl productService){
         this.productService =productService;
     }
-
     @PostMapping()
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
         productService.create(product);
@@ -31,13 +31,11 @@ public class ProductContoller {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-    @CrossOrigin
     @GetMapping()
     public ProductResponseFormat getAllProducts() {
         List<Product> productList = productService.readAll();
         return new ProductResponseFormat(productList);
     }
-
     @GetMapping(path = "{id}")
     public Product getProductById(@PathVariable Long id){
         return productService.readById(id);
