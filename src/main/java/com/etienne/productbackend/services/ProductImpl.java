@@ -42,15 +42,16 @@ public class ProductImpl {
         Product actualProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("produit avec l'id : " + id + " est introuvable"));
 
-        actualProduct.setCode(updatedProduct.getCode());
-        actualProduct.setName(updatedProduct.getName());
-        actualProduct.setDescription(updatedProduct.getDescription());
-        actualProduct.setPrice(updatedProduct.getPrice());
-        actualProduct.setQuantity(updatedProduct.getQuantity());
-        actualProduct.setInventoryStatus(updatedProduct.getInventoryStatus());
-        actualProduct.setCategory(updatedProduct.getCategory());
-        actualProduct.setImage(updatedProduct.getImage());
-        actualProduct.setRating(updatedProduct.getRating());
+        actualProduct.setCode((updatedProduct.getCode() != null) ? updatedProduct.getCode() : actualProduct.getCode());
+        actualProduct.setName((updatedProduct.getName() != null) ? updatedProduct.getName() : actualProduct.getName());
+        actualProduct.setDescription((updatedProduct.getDescription() != null) ? updatedProduct.getDescription() : actualProduct.getDescription());
+        actualProduct.setPrice((updatedProduct.getPrice() != null) ? updatedProduct.getPrice() : actualProduct.getPrice());
+        actualProduct.setQuantity((updatedProduct.getQuantity() != null) ? updatedProduct.getQuantity() : actualProduct.getQuantity());
+        actualProduct.setInventoryStatus((updatedProduct.getInventoryStatus() != null) ? updatedProduct.getInventoryStatus() : actualProduct.getInventoryStatus());
+        actualProduct.setCategory((updatedProduct.getCategory() != null) ? updatedProduct.getCategory() : actualProduct.getCategory());
+        actualProduct.setImage((updatedProduct.getImage() != null) ? updatedProduct.getImage() : actualProduct.getImage());
+        actualProduct.setRating((updatedProduct.getRating() != null) ? updatedProduct.getRating() : actualProduct.getRating());
+
         // enregistrer les modifications
         productRepository.save(actualProduct);
     }
